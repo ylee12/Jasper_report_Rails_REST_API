@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  report_name: MyString
+  server_name: MyString
+  server_port: 1
+  login: MyString
+  password: MyString
+  organization_id: MyString
+  report_format: MyString
+  report_output_file_name: MyString
+  path_to_report: MyString
+  report_id: MyString
+
+two:
+  report_name: MyString
+  server_name: MyString
+  server_port: 1
+  login: MyString
+  password: MyString
+  organization_id: MyString
+  report_format: MyString
+  report_output_file_name: MyString
+  path_to_report: MyString
+  report_id: MyString

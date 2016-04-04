@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Report name:</strong>
+  <%= @report.report_name %>
+</p>
+
+<p>
+  <strong>Server name:</strong>
+  <%= @report.server_name %>
+</p>
+
+<p>
+  <strong>Server port:</strong>
+  <%= @report.server_port %>
+</p>
+
+<p>
+  <strong>Login:</strong>
+  <%= @report.login %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @report.password %>
+</p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @report.organization_id %>
+</p>
+
+<p>
+  <strong>Report format:</strong>
+  <%= @report.report_format %>
+</p>
+
+<p>
+  <strong>Report output file name:</strong>
+  <%= @report.report_output_file_name %>
+</p>
+
+<p>
+  <strong>Path to report:</strong>
+  <%= @report.path_to_report %>
+</p>
+
+<p>
+  <strong>Report:</strong>
+  <%= @report.report_id %>
+</p>
+
+<%= link_to 'Edit', edit_report_path(@report) %> |
+<%= link_to 'Back', reports_path %>

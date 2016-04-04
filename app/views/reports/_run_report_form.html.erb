@@ -1,0 +1,140 @@
+<%= form_for(@report, :url => {:controller => "reports", :action => "generate_report"}) do |f| %>
+  <% if @report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@report.errors.count, "error") %> prohibited this report from being run:</h2>
+
+      <ul>
+      <% @report.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= field_set_tag 'Server Information', :class => 'deco1' do %>
+ 
+  <div class="field">
+    <%= f.label :server_name %><br>
+    <%= f.text_field :server_name, :value => 'reporttest.mtc.ca.gov' %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :server_port %><br>
+    <%= f.number_field :server_port, :value => '80' %>
+  </div>
+  
+<% end %>
+  
+  
+<%= field_set_tag 'User Information', :class => 'deco1' do %>
+  
+  <div class="field">
+    <%= f.label 'User Name/ID' %><br>
+    <%= f.text_field :login, :value => 'fmsread' %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.text_field :password, :value => 'fmsread' %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :organization_id %><br>
+    <%= f.text_field :organization_id, :value => 'mtc_pa' %>
+  </div>
+  
+  
+<% end %>
+  
+  
+<%= field_set_tag 'Report Information', :class => 'deco1' do %>
+  
+  <div class="field">
+  	<!-- %= f.label "Select a report to be run" %><br -->
+    <%= select_tag(:report_path_selection, options_for_select([['Select a report to be run',''],
+    												['/fms/production/reports/internal/Agency_Funding_Report', '/fms/production/reports/internal/Agency_Funding_Report'], 
+    												['/fms/production/reports/internal/Project_Conformity_Summary_Report', '/fms/production/reports/internal/Project_Conformity_Summary_Report'], 
+    												['/fms/production/reports/public/single_point_of_contact_report', '/fms/production/reports/public/single_point_of_contact_report']
+    												
+    												]), {class: "select_box_medium"})%>
+  	
+    
+  </div>
+  <!-- ['/fms/production/reports/internal/project_comprehensive_funding_authority', '/fms/production/reports/internal/project_comprehensive_funding_authority'] -->
+  
+  <div class="field">
+    <%= f.label "Or type in a path for the report" %><br>
+    <p class="hint">Note: Entry in this input field will take precedence(ie. /fms/production/reports/public/ARRA_FHWA)</p>
+    <%= f.text_field :path_to_report, :value => '', :size => 120 %>
+  </div>
+  
+  <!-- multiple value selection  -->
+  <div class="field">
+    <%= f.label "County parameter:" %><br>
+    <%= select_tag(:COUNTY_CDE, options_for_select([['Alameda', 'ALA'], ['Contra Costa', 'CC'], ['Marin', 'MRN'], ['Napa', 'NAP'], ['Regional', 'REG'], ['San Francisco', 'SF']]), {class: "select_box", multiple: true})%>
+  </div>
+  
+  <!-- multiple value selection  -->
+  <div class="field">
+    <%= f.label "Sponsor parameter:" %><br>
+    <%= select_tag(:sponsorCdes, options_for_select([['AMTRAK', 'AMTRAK'], ['Alameda (City)', 'Alameda'], ['Alameda Contra Costa Transit District (AC Transit)', 'AC Transit'], 
+    												['Alameda County', 'Alameda County'], ['Calif. High Speed Rail Authority', 'CA HS Rail'], 
+    												['Albany', 'Albany']]), {class: "select_box", multiple: true})%>
+  </div>
+  
+  <!-- multiple value selection  -->
+  <div class="field">
+    <%= f.label "Status parameter:" %><br>
+    <%= select_tag(:statusCdes, options_for_select([['Active', 'ACTIVE'], ['Proposed', 'PROPOSED']]), {class: "select_box", multiple: true})%>
+  </div>
+  
+  
+<% end %>
+
+  
+<%= field_set_tag 'Report Output Information', :class => 'deco1' do %>
+  
+<!--
+  <div class="field">
+    <%= f.label 'Report Format (html or xml)' %><br>
+    <%= f.text_field :report_format, :value => 'html' %>
+  </div>
+ --> 
+  <div class="field">
+  	<%= f.label 'Report Format' %><br>
+    <%= select_tag(:report_format, options_for_select([
+    												['html', 'html'], 
+    												['pdf', 'pdf'], 
+    												['xml', 'xml']					
+    												]), {class: "select_box"})%>
+  	
+    
+  </div>
+ 
+  <div class="field">
+    <%= f.label 'File Name for the Generated Report' %><br>
+    <%= f.text_field :report_output_file_name, :value => 'my_report' %>
+  </div>
+  
+  
+<% end %>
+  
+   
+  
+<!--  
+  <div class="field">
+    <%= f.label 'Report ID/Name to be run' %><br>
+    <%= f.text_field :report_id %>
+  </div>
+  
+ 
+  <div class="field">
+    <%= f.label :report_name %><br>
+    <%= f.text_field :report_name %>
+  </div>
+ --> 
+  
+  <div class="actions">
+    <%= f.submit  'Run Report' %>
+  </div>
+<% end %>

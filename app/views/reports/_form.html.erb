@@ -1,0 +1,57 @@
+<%= form_for(@report) do |f| %>
+  <% if @report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@report.errors.count, "error") %> prohibited this report from being saved:</h2>
+
+      <ul>
+      <% @report.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :report_name %><br>
+    <%= f.text_field :report_name %>
+  </div>
+  <div class="field">
+    <%= f.label :server_name %><br>
+    <%= f.text_field :server_name %>
+  </div>
+  <div class="field">
+    <%= f.label :server_port %><br>
+    <%= f.number_field :server_port %>
+  </div>
+  <div class="field">
+    <%= f.label :login %><br>
+    <%= f.text_field :login %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.text_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :organization_id %><br>
+    <%= f.text_field :organization_id %>
+  </div>
+  <div class="field">
+    <%= f.label :report_format %><br>
+    <%= f.text_field :report_format %>
+  </div>
+  <div class="field">
+    <%= f.label :report_output_file_name %><br>
+    <%= f.text_field :report_output_file_name %>
+  </div>
+  <div class="field">
+    <%= f.label :path_to_report %><br>
+    <%= f.text_field :path_to_report %>
+  </div>
+  <div class="field">
+    <%= f.label :report_id %><br>
+    <%= f.text_field :report_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

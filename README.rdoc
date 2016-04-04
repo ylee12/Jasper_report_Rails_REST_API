@@ -1,0 +1,36 @@
+== README
+
+
+
+This project demonstrates the use of JasperReport REST V2 API to run a report in a JasperServer from a Rails client.
+   
+To run this project, you will need a Ruby & Rails development environment installed in your machine, then
+
+1. Download/Clone this project to your machine. For example, git clone https://github.com/metrotranscom/jasper_rails_rest_api.git
+2. CD to this project folder.
+3. Type bundle install. For example, ylee@YLEE-QA:/jasper_rails_rest_api$ bundle install
+4. Type rake db:create. For example, ylee@YLEE-QA://jasper_rails_rest_api$ rake db:create
+4. Type rake db:migrate. For example, ylee@YLEE-QA:/jasper_rails_rest_api$ rake db:migrate
+5. Type rails server to bring up the application server.
+6. In your browser, type http://localhost:3000 to run the application. 
+
+Cheers and Good luck!
+
+
+Something extra for the curious:
+
+
+According to the JasperReports's web services guide, here are the key steps to run the reports using its REST API. In the code, this is from the function generate_report() in the file /jasper_rails_rest_api/app/controllers/reports_controller.rb
+
+1. Encode the authentication in a http header.
+
+# encode the report's user name and password in HTTP header for basic authentication
+user_auth_str = "#{@login}|#{@organization_id}"        
+auth = "Basic " + Base64::strict_encode64("#{user_auth_str}:#{@password}")
+
+2. Send the request with its encoded authentication.
+
+#run the report
+response = RestClient.get("#{report_url}", :authorization=>auth)
+
+

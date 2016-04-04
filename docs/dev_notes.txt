@@ -1,0 +1,43 @@
+
+
+First time setup and run the app
+
+ylee@YLEE-QA:/media/ylee_github/jasper_rails_rest_api$ bundle install
+ylee@YLEE-QA:/media/ylee_github/jasper_rails_rest_api$ rake db:create
+ylee@YLEE-QA:/media/ylee_github/jasper_rails_rest_api$ rake db:migrate
+
+
+========================================
+
+
+RestClient.get "http://reporttest.mtc.ca.gov/jasperserver-pro/rest_v2/serverInfo"
+
+RestClient.get "http://reporttest.mtc.ca.gov/jasperserver-pro/rest_v2/resources"    # get Unauthorized Access
+
+RestClient.get "http://reporttest.mtc.ca.gov/jasperserver-pro/rest_v2/reports/fms/production/reports/public/single_point_of_contact_report.pdf"
+
+require 'restclient'
+require 'base64'
+
+require 'base64'; user_name = "ylee"; org = "mtc_pa"; login = "#{user_name}|#{org}"; password = "password"; auth = "Basic " + Base64::strict_encode64("#{login}:#{password}") 
+
+response = RestClient.get("http://reporttest.mtc.ca.gov/jasperserver-pro/rest_v2/reports/fms/production/reports/public/single_point_of_contact_report.pdf", :authorization=>auth)
+
+response = RestClient.get("http://reporttest.mtc.ca.gov/jasperserver-pro/rest_v2/reports/fms/production/reports/public/single_point_of_contact_report.html", :authorization=>auth)
+
+response = RestClient.get("http://reporttest.mtc.ca.gov/jasperserver-pro/rest_v2/reports/fms/production/reports/public/single_point_of_contact_report.xml", :authorization=>auth)
+
+#Single parameter
+
+param_value = "AGENCY_CDE=AMTRAK&AGENCY_CDE=Alameda&AGENCY_CDE=AC Transit"; require 'uri'; param_value = URI.escape(param_value);
+
+response = RestClient.get("http://reporttest.mtc.ca.gov/jasperserver-pro/rest_v2/reports/fms/production/reports/public/single_point_of_contact_report.html?#{param_value}", :authorization=>auth)
+
+#escape value
+response = RestClient.get("http://reporttest.mtc.ca.gov/jasperserver-pro/rest_v2/reports/fms/production/reports/public/single_point_of_contact_report.html?AGENCY_CDE=AMTRAK&AGENCY_CDE=Alameda&AGENCY_CDE=AC%20Transit", :authorization=>auth)
+
+response = RestClient.get("http://reporttest.mtc.ca.gov/jasperserver-pro/rest_v2/reports/fms/production/reports/public/Project_Listing_Report.html?FILTER_CRITERIA=Advanced%20Search&COUNTY_CDE=NAP&STATUS_CODE=ACTIVE", :authorization=>auth)
+
+
+/fms/production/reports/public/Project_Listing_Report
+/fms/production/reports/internal/project_comprehensive_funding_authority
